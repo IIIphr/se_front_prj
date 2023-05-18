@@ -1,0 +1,8 @@
+.app_root{
+  width: 100%;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
