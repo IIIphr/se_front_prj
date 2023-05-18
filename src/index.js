@@ -1,19 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import List from './List';
-import Login from './Login';
-import Signup from './Signup';
-import reportWebVitals from './reportWebVitals';
-
-import store from './store'
 import { Provider } from 'react-redux'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 import { CookiesProvider } from 'react-cookie';
+import App from './App';
+import List from './List';
+import Login from './Login';
+import Signup from './Signup';
+import reportWebVitals from './reportWebVitals';
+import store from './store'
+import Profile from './Profile';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
   },
 ]);
 

@@ -18,13 +18,18 @@ function addMonths(date, months) {
 function Login() {
   const dispatch = useDispatch();
   const name = useSelector((state) => state.user.user_f_name);
+  const user_type = useSelector((state) => state.user.user_type);
   const [input, setInput] = useState('');
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(['user_f_name']);
 
   useEffect(() => {
-    if(cookies.user_f_name !== "undefined" && cookies.user_f_name){
-      dispatch(change_f_name(cookies.user_f_name));
+    if(user_type == null){
+      if(cookies.user_type !== "undefined" && cookies.user_type){
+        dispatch(change_f_name(cookies.user_f_name));
+        dispatch(change_type(cookies.user_type));
+        navigate('/');
+      }
     }
   }, []);
 
@@ -40,14 +45,7 @@ function Login() {
           setCookie('user_f_name', input, { path: '/', expires: addMonths(new Date(), 1) });
           setCookie('user_type', "user", { path: '/', expires: addMonths(new Date(), 1) });
           navigate('/');
-        }}>تغییر نام</button>
-        <button onClick={() => {
-          dispatch(change_f_name(""));
-          dispatch(change_type(null));
-          removeCookie('user_f_name');
-          removeCookie('user_type');
-          navigate('/');
-        }}>خروج</button>
+        }}>ورود</button>
         <Link to='/signup'>ثبت نام</Link>
         <Link to='/'>صفحه‌ی اصلی</Link>
       </div>

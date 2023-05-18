@@ -13,17 +13,19 @@ function Navbar(){
     const [cookies] = useCookies(['user_f_name', 'user_type']);
   
     useEffect(() => {
-      if(cookies.user_type !== "undefined" && cookies.user_type){
-        dispatch(change_f_name(cookies.user_f_name));
-        dispatch(change_type(cookies.user_type));
-      }
+        if(user_type == null){
+            if(cookies.user_type !== "undefined" && cookies.user_type){
+                dispatch(change_f_name(cookies.user_f_name));
+                dispatch(change_type(cookies.user_type));
+            }
+        }
     }, []);
 
     return (
         <div className='navbar_root'>
             {user_type == null ? 
             <Link className='navbar_link' to='/login'>ورود</Link> : 
-            <Link className='navbar_link' to='/login'>سلام {user_f_name}!</Link>}
+            <Link className='navbar_link' to='/profile'>سلام {user_f_name}!</Link>}
         </div>
     );
 }
