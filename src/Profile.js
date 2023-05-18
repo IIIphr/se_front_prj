@@ -11,7 +11,7 @@ function Profile() {
   const name = useSelector((state) => state.user.user_f_name);
   const user_type = useSelector((state) => state.user.user_type);
   const navigate = useNavigate();
-  const [cookies, removeCookie] = useCookies(['user_f_name']);
+  const [cookies, removeCookie] = useCookies(['user_type']);
 
   useEffect(() => {
     if(user_type == null){
@@ -33,6 +33,7 @@ function Profile() {
           removeCookie('user_type');
           navigate('/');
         }}>خروج</button>
+        <Link to='/add_coupun'>فروش کد</Link>
       </div>
     </Fragment>
   );

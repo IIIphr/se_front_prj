@@ -11,7 +11,7 @@ function App() {
   const user_type = useSelector((state) => state.user.user_type);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [cookies] = useCookies(['user_f_name']);
+  const [cookies] = useCookies(['user_f_name', 'user_type']);
 
   useEffect(() => {
     if(user_type == null){

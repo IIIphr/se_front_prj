@@ -17,11 +17,10 @@ function addMonths(date, months) {
 
 function Login() {
   const dispatch = useDispatch();
-  const name = useSelector((state) => state.user.user_f_name);
   const user_type = useSelector((state) => state.user.user_type);
   const [input, setInput] = useState('');
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(['user_f_name']);
+  const [cookies, setCookie] = useCookies(['user_f_name', 'user_type']);
 
   useEffect(() => {
     if(user_type == null){

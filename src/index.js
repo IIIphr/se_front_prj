@@ -14,6 +14,7 @@ import Signup from './Signup';
 import reportWebVitals from './reportWebVitals';
 import store from './store'
 import Profile from './Profile';
+import Add_coupun from './Add_coupun';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile />,
+  },
+  {
+    path: "/add_coupun",
+    element: <Add_coupun />,
   },
 ]);
 
