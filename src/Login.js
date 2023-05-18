@@ -47,7 +47,6 @@ function Login() {
           navigate('/');
         }}>ورود</button>
         <Link to='/signup'>ثبت نام</Link>
-        <Link to='/'>صفحه‌ی اصلی</Link>
       </div>
     </Fragment>
   );

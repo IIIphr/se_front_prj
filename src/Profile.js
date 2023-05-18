@@ -33,7 +33,6 @@ function Profile() {
           removeCookie('user_type');
           navigate('/');
         }}>خروج</button>
-        <Link to='/'>صفحه‌ی اصلی</Link>
       </div>
     </Fragment>
   );

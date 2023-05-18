@@ -9,7 +9,6 @@ function List() {
       <Navbar />
       <div className='list_root'>
         <h1>لیست کدها</h1>
-        <Link to='/'>صفحه‌ی اصلی</Link>
       </div>
     </Fragment>
   );

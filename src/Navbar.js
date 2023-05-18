@@ -23,6 +23,7 @@ function Navbar(){
 
     return (
         <div className='navbar_root'>
+            <Link className='navbar_link' to='/'>صفحه‌ی اصلی</Link>
             {user_type == null ? 
             <Link className='navbar_link' to='/login'>ورود</Link> : 
             <Link className='navbar_link' to='/profile'>سلام {user_f_name}!</Link>}

@@ -23,3 +23,7 @@ p{
 .ltr{
   direction: ltr;
 }
+
+*{
+  transition-duration: 0.2s;
+}

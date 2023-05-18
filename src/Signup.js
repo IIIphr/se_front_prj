@@ -9,7 +9,6 @@ function Signup() {
       <Navbar />
       <div className='login_root'>
         <h1>ثبت نام</h1>
-        <Link to='/'>صفحه‌ی اصلی</Link>
       </div>
     </Fragment>
   );
