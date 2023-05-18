@@ -1,8 +1,24 @@
 .navbar_root{
     width: 100%;
-    display: grid;
-    align-content: center;
+    height: 10vh;
+    background-color: black;
+    position: sticky;
+    top: 0;
+    display: flex;
     justify-content: center;
     align-items: center;
     justify-items: center;
-  }
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+}
+
+.navbar_link{
+    color: white;
+    direction: rtl;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+.navbar_link:hover{
+    background-color: grey;
+}

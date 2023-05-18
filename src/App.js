@@ -15,7 +15,6 @@ function App() {
   useEffect(() => {
     if(cookies.user_f_name !== "undefined" && cookies.user_f_name){
       dispatch(change_f_name(cookies.user_f_name));
-      navigate('/');
     }
   }, []);
 
@@ -24,8 +23,6 @@ function App() {
       <Navbar />
       <div className='app_root'>
         <h1>به سامانه‌ی تبادل کد فراموشی خوش آمدید</h1>
-        <p>سلام {name}!</p>
-        <Link to='/login'>ورود به حساب</Link>
         <Link to='/list'>لیست کدها</Link>
       </div>
     </Fragment>

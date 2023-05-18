@@ -15,3 +15,11 @@ code {
 p{
   direction: rtl;
 }
+
+.rtl{
+  direction: rtl;
+}
+
+.ltr{
+  direction: ltr;
+}
