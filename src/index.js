@@ -7,6 +7,9 @@ import Login from './Login';
 import Signup from './Signup';
 import reportWebVitals from './reportWebVitals';
 
+import store from './store'
+import { Provider } from 'react-redux'
+
 import {
   createBrowserRouter,
   RouterProvider,
@@ -34,7 +37,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
 
