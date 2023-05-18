@@ -4,7 +4,7 @@ function App() {
   return (
     <div className='app_root'>
       <h1>به سامانه‌ی تبادل کد فراموشی خوش آمدید</h1>
-      <a>ورود به حساب یا ثبت نام</a>
+      <a href='/login'>ورود به حساب</a>
       <a href='/list'>لیست کدها</a>
     </div>
   );

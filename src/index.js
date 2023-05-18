@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import List from './List';
+import Login from './Login';
+import Signup from './Signup';
 import reportWebVitals from './reportWebVitals';
 
 import {
@@ -18,6 +20,14 @@ const router = createBrowserRouter([
   {
     path: "/list",
     element: <List />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
   },
 ]);
 
