@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom';
 import './Signup.css';
 
 function Signup() {
   return (
     <div className='login_root'>
       <h1>ثبت نام</h1>
-      <a href='/'>صفحه‌ی اصلی</a>
+      <Link to='/'>صفحه‌ی اصلی</Link>
     </div>
   );
 }

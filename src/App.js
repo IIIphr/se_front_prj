@@ -1,30 +1,34 @@
 import './App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
-import { useEffect } from 'react';
-import { change_name } from './userSlice';
-import { useNavigate } from 'react-router-dom';
+import { Fragment, useEffect } from 'react';
+import { change_f_name } from './userSlice';
+import { useNavigate, Link } from 'react-router-dom';
+import Navbar from './Navbar';
 
 function App() {
-  const name = useSelector((state) => state.user.user_name);
+  const name = useSelector((state) => state.user.user_f_name);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(['user_name']);
+  const [cookies] = useCookies(['user_f_name']);
 
   useEffect(() => {
-    if(cookies.user_name != "undefined" && cookies.user_name){
-      dispatch(change_name(cookies.user_name));
+    if(cookies.user_f_name !== "undefined" && cookies.user_f_name){
+      dispatch(change_f_name(cookies.user_f_name));
       navigate('/');
     }
   }, []);
 
   return (
-    <div className='app_root'>
-      <h1>به سامانه‌ی تبادل کد فراموشی خوش آمدید</h1>
-      <p>سلام {name}!</p>
-      <a href='/login'>ورود به حساب</a>
-      <a href='/list'>لیست کدها</a>
-    </div>
+    <Fragment>
+      <Navbar />
+      <div className='app_root'>
+        <h1>به سامانه‌ی تبادل کد فراموشی خوش آمدید</h1>
+        <p>سلام {name}!</p>
+        <Link to='/login'>ورود به حساب</Link>
+        <Link to='/list'>لیست کدها</Link>
+      </div>
+    </Fragment>
   );
 }
 

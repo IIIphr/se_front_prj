@@ -1,9 +1,9 @@
 import './Login.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { change_name } from './userSlice';
+import { change_f_name } from './userSlice';
 import { useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function addMonths(date, months) {
   var d = date.getDate();
@@ -16,14 +16,14 @@ function addMonths(date, months) {
 
 function Login() {
   const dispatch = useDispatch();
-  const name = useSelector((state) => state.user.user_name);
+  const name = useSelector((state) => state.user.user_f_name);
   const [input, setInput] = useState('');
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(['user_name']);
+  const [cookies, setCookie, removeCookie] = useCookies(['user_f_name']);
 
   useEffect(() => {
-    if(cookies.user_name != "undefined" && cookies.user_name){
-      dispatch(change_name(cookies.user_name));
+    if(cookies.user_f_name !== "undefined" && cookies.user_f_name){
+      dispatch(change_f_name(cookies.user_f_name));
       navigate('/login');
     }
   }, []);
@@ -34,15 +34,15 @@ function Login() {
       <p>سلام {name}!</p>
       <input type='text' id='name_input' value={input} onInput={e => setInput(e.target.value)}></input>
       <button onClick={() => {
-        dispatch(change_name(input));
-        setCookie('user_name', input, { path: '/', expires: addMonths(new Date(), 1) });
+        dispatch(change_f_name(input));
+        setCookie('user_f_name', input, { path: '/', expires: addMonths(new Date(), 1) });
       }}>تغییر نام</button>
       <button onClick={() => {
-        dispatch(change_name(""));
-        removeCookie('user_name');
+        dispatch(change_f_name(""));
+        removeCookie('user_f_name');
       }}>خروج</button>
-      <a href='/signup'>ثبت نام</a>
-      <a href='/'>صفحه‌ی اصلی</a>
+      <Link to='/signup'>ثبت نام</Link>
+      <Link to='/'>صفحه‌ی اصلی</Link>
     </div>
   );
 }
