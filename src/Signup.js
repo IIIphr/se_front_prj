@@ -51,9 +51,9 @@ function Signup() {
         <p className='rtl'>دانشگاه</p>
         <input type='number' id='uni_input' value={uni_input} onInput={e => set_uni_input(e.target.value)}></input>
         <p className='rtl'>شماره‌ی دانشجویی</p>
-        <input className='rtl' type='text' id='id_input' value={id_input} onInput={e => set_id_input(e.target.value)}></input>
+        <input type='text' id='id_input' value={id_input} onInput={e => set_id_input(e.target.value)}></input>
         <p className='rtl'>رمز</p>
-        <input className='rtl' type='text' id='password_input' value={password_input} onInput={e => set_password_input(e.target.value)}></input>
+        <input type='text' id='password_input' value={password_input} onInput={e => set_password_input(e.target.value)}></input>
         {is_loading == 0 ?
         <button className='ui_btn' onClick={() => {
           set_loading(1); 
@@ -69,7 +69,7 @@ function Signup() {
               "currentmoney": 0
             })
           })
-            .then(res => res.json)
+            .then(res => res.json())
             .then((result) => {
               dispatch(change_f_name(name_input));
               dispatch(change_type("user"));
