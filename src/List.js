@@ -63,7 +63,27 @@ function List() {
                       <p>{record.foodname}</p>
                       <p>{record.studentid}</p>
                       <p>{record.price}</p>
-                      <Link className='ui_btn' to={'/success/'+record._id}>buy</Link>
+                      <button className='ui_btn' onClick={() => {
+                        set_loading(0);
+                        fetch("http://localhost:4000/api/buy",
+                        {
+                          method: "POST",
+                          body: JSON.stringify({
+                            "_id": record._id,
+                            "buyersid": cookies.user_stu_id,
+                            "buyeruid": cookies.user_uni_id
+                          })
+                        })
+                          .then(res => res.json())
+                          .then((result) => {
+                            if(result.stat == 'FOUND'){
+                              navigate('/success');
+                            }
+                            else{
+                              navigate('/list');
+                            }
+                          });
+                      }}>buy</button>
                     </div>;
           })
           }
