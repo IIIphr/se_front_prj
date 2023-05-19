@@ -48,7 +48,7 @@ function Login() {
           dispatch(change_type("user"));
           dispatch(change_uni_id(uni_input));
           setCookie('user_f_name', name_input, { path: '/', expires: addMonths(new Date(), 1) });
-          setCookie('user_uni_type', uni_input, { path: '/', expires: addMonths(new Date(), 1) });
+          setCookie('user_uni_id', uni_input, { path: '/', expires: addMonths(new Date(), 1) });
           setCookie('user_type', "user", { path: '/', expires: addMonths(new Date(), 1) });
           navigate('/');
         }}>ورود</button>
