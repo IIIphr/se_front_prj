@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import './Signup.css';
 import Navbar from './Navbar';
 import { Fragment } from 'react';
@@ -7,8 +6,8 @@ function Signup() {
   return (
     <Fragment>
       <Navbar />
-      <div className='login_root'>
-        <h1>ثبت نام</h1>
+      <div className='signup_root'>
+        <h1 className='rtl'>ثبت نام</h1>
       </div>
     </Fragment>
   );
