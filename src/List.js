@@ -1,16 +1,19 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import './List.css';
 import Navbar from './Navbar';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
-import { change_type, change_uni_id, change_f_name } from './userSlice';
+import { change_type, change_uni_id, change_f_name, change_stu_id } from './userSlice';
 import { useNavigate, Link } from 'react-router-dom';
+import { RotatingLines } from 'react-loader-spinner';
 
 function List() {
   const user_type = useSelector((state) => state.user.user_type);
   const dispatch = useDispatch();
-  const [cookies] = useCookies(['user_f_name', 'user_type', 'user_uni_id']);
+  const [cookies] = useCookies(['user_f_name', 'user_type', 'user_uni_id', 'user_stu_id']);
   const navigate = useNavigate();
+  const [is_loading, set_loading] = useState(0);
+  const [data, set_data] = useState([]);
 
   useEffect(() => {
     if(user_type == null){
@@ -18,10 +21,26 @@ function List() {
         dispatch(change_f_name(cookies.user_f_name));
         dispatch(change_type(cookies.user_type));
         dispatch(change_uni_id(cookies.user_uni_id));
+        dispatch(change_stu_id(cookies.user_stu_id));
       }
       else{
         navigate('/login');
       }
+    }
+    else{
+      fetch("http://localhost:4000/api/codes",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          "canteenid": "1",
+          "universityid": cookies.user_uni_id
+        })
+      })
+        .then(res => res.json())
+        .then((result) => {
+          set_data(result);
+          set_loading(1);
+        });
     }
   }, []);
 
@@ -31,60 +50,23 @@ function List() {
       <div className='list_root'>
         <h1 className='rtl'>لیست کدها</h1>
         <div className='coupun_container'>
-          <div className='coupun_entry'>
-            <p>coupun 1</p>
-            <p>seller name</p>
-            <p>canteen code</p>
-            <Link className='ui_btn' to='/success'>buy</Link>
-          </div>
-          <div className='coupun_entry'>
-            <p>coupun 1</p>
-            <p>seller name</p>
-            <p>canteen code</p>
-            <Link className='ui_btn' to='/success'>buy</Link>
-          </div>
-          <div className='coupun_entry'>
-            <p>coupun 2</p>
-            <p>seller name</p>
-            <p>canteen code</p>
-            <Link className='ui_btn' to='/success'>buy</Link>
-          </div>
-          <div className='coupun_entry'>
-            <p>coupun 3</p>
-            <p>seller name</p>
-            <p>canteen code</p>
-            <Link className='ui_btn' to='/success'>buy</Link>
-          </div>
-          <div className='coupun_entry'>
-            <p>coupun 4</p>
-            <p>seller name</p>
-            <p>canteen code</p>
-            <Link className='ui_btn' to='/success'>buy</Link>
-          </div>
-          <div className='coupun_entry'>
-            <p>coupun 5</p>
-            <p>seller name</p>
-            <p>canteen code</p>
-            <Link className='ui_btn' to='/success'>buy</Link>
-          </div>
-          <div className='coupun_entry'>
-            <p>coupun 6</p>
-            <p>seller name</p>
-            <p>canteen code</p>
-            <Link className='ui_btn' to='/success'>buy</Link>
-          </div>
-          <div className='coupun_entry'>
-            <p>coupun 7</p>
-            <p>seller name</p>
-            <p>canteen code</p>
-            <Link className='ui_btn' to='/success'>buy</Link>
-          </div>
-          <div className='coupun_entry'>
-            <p>coupun 8</p>
-            <p>seller name</p>
-            <p>canteen code</p>
-            <Link className='ui_btn' to='/success'>buy</Link>
-          </div>
+          {is_loading == 0 ? 
+          <RotatingLines
+            strokeColor="black"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="50"
+            visible={true}
+          /> :
+          (data || []).map(record => {
+            return  <div key={record._id} className='coupun_entry'>
+                      <p>{record.foodname}</p>
+                      <p>{record.studentid}</p>
+                      <p>{record.price}</p>
+                      <Link className='ui_btn' to={'/success/'+record._id}>buy</Link>
+                    </div>;
+          })
+          }
         </div>
       </div>
     </Fragment>
