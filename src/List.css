@@ -32,3 +32,20 @@
 .coupun_entry:hover{
   border-bottom: 5px solid black;
 }
+
+.ui_btn{
+  color: black;
+  direction: rtl;
+  text-decoration: none;
+  padding: 5px 10px;
+  margin: 20px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  background-color: white;
+  border-bottom: 1px solid black;
+}
+.ui_btn:hover{
+  background-color: grey;
+  border-bottom: 5px solid black;
+}
