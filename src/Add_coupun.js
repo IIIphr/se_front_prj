@@ -29,7 +29,7 @@ function Add_coupun() {
         <input type='text' id='code_input' value={coupun_code} onInput={e => set_coupun_code(e.target.value)}></input>
         <p className='rtl'>قیمت:</p>
         <input type='number' id='price_input' value={coupun_price} onInput={e => set_coupun_price(e.target.value)}></input>
-        <button onClick={() => console.log("Submitted: "+coupun_code+"-"+coupun_price)}>ثبت کد</button>
+        <button className='ui_btn' onClick={() => console.log("Submitted: "+coupun_code+"-"+coupun_price)}>ثبت کد</button>
       </div>
     </Fragment>
   );
