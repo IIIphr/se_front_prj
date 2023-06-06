@@ -35,6 +35,7 @@ function Profile() {
           removeCookie('user_uni_id');
           navigate('/');
         }}>خروج</button>
+        <p>موجودی: wip</p>
         <Link to='/add_coupun'>فروش کد</Link>
       </div>
     </Fragment>
