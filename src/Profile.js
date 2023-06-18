@@ -11,7 +11,7 @@ function Profile() {
   const name = useSelector((state) => state.user.user_f_name);
   const user_type = useSelector((state) => state.user.user_type);
   const navigate = useNavigate();
-  const [cookies, removeCookie] = useCookies(['user_type', 'user_type', 'user_uni_id']);
+  const [cookies, removeCookie] = useCookies(['user_type', 'user_type', 'user_uni_id', 'user_credit']);
 
   useEffect(() => {
     if(user_type == null){
@@ -35,7 +35,7 @@ function Profile() {
           removeCookie('user_uni_id');
           navigate('/');
         }}>خروج</button>
-        <p>موجودی: wip</p>
+        <p>موجودی: {cookies.user_credit}</p>
         <Link to='/add_coupun'>فروش کد</Link>
       </div>
     </Fragment>
