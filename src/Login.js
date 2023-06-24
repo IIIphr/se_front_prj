@@ -4,7 +4,7 @@ import { change_credit, change_f_name, change_l_name, change_stu_id, change_type
 import { useState, useEffect, Fragment } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate, Link } from 'react-router-dom';
-import Navbar from './Navbar';
+import Navbarr from './Navbarr';
 import { RotatingLines } from 'react-loader-spinner';
 
 function addMonths(date, months) {
@@ -39,7 +39,7 @@ function Login() {
 
   return (
     <Fragment>
-      <Navbar />
+      <Navbarr />
       <div className='login_root'>
         <h1>ورود</h1>
         <p className='rtl'>شماره‌ی دانشجویی</p>

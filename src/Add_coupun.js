@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useEffect, Fragment, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
-import Navbar from './Navbar';
+import Navbarr from './Navbarr';
 import { RotatingLines } from 'react-loader-spinner';
 
 function Add_coupun() {
@@ -26,7 +26,7 @@ function Add_coupun() {
 
   return (
     <Fragment>
-      <Navbar />
+      <Navbarr />
       <div className='add_coupun_root'>
         <h1 className='rtl'>فروش کد</h1>
         <p className='rtl'>کد فراموشی:</p>

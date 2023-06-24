@@ -4,7 +4,7 @@ import { change_f_name, change_type, change_uni_id } from './userSlice';
 import { useEffect, Fragment } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate, Link } from 'react-router-dom';
-import Navbar from './Navbar';
+import Navbarr from './Navbarr';
 
 function Profile() {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ function Profile() {
 
   return (
     <Fragment>
-      <Navbar />
+      <Navbarr />
       <div className='profile_root'>
         <h1 className='rtl'>پروفایل {name}</h1>
         <button className='ui_btn' onClick={() => {

@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import { Fragment, useEffect } from 'react';
 import { change_f_name, change_stu_id, change_type, change_uni_id } from './userSlice';
 import { Link } from 'react-router-dom';
-import Navbar from './Navbar';
+import Navbarr from './Navbarr';
 
 function App() {
   const name = useSelector((state) => state.user.user_f_name);
@@ -25,7 +25,7 @@ function App() {
 
   return (
     <Fragment>
-      <Navbar />
+      <Navbarr />
       <div className='app_root'>
         <h1 className='rtl'>به سامانه‌ی تبادل کد فراموشی خوش آمدید</h1>
         {user_type != null ? 

@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 import './List.css';
-import Navbar from './Navbar';
+import Navbarr from './Navbarr';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { change_type, change_uni_id, change_f_name, change_stu_id } from './userSlice';
@@ -46,7 +46,7 @@ function List() {
 
   return (
     <Fragment>
-      <Navbar />
+      <Navbarr />
       <div className='list_root'>
         <h1 className='rtl'>لیست کدها</h1>
         <div className='coupun_container'>
