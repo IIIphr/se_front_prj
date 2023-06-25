@@ -25,14 +25,14 @@ function Navbarr() {
     }, []);
 
     return (
-        <Navbar sticky='top' expand="lg" className="bg-body-tertiary" data-bs-theme="dark" dir='rtl'>
+        <Navbar sticky='top' expand="lg" bg="dark" data-bs-theme="dark" dir='rtl'>
             <Container>
                 <Navbar.Brand><Link className='navbar_unlink' to='/'>سامانه‌ی تبادل کد فراموشی</Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
+                <Navbar.Collapse className='rtl' id="basic-navbar-nav">
                     {user_type == null ?
-                    <Link className='navbar_unlink' to='/login'>ورود</Link> :
-                    <Link className='navbar_unlink' to='/profile'>سلام {user_f_name}! - دانشگاه {user_uni_id}</Link>}
+                    <Link className='navbar_unlink mx-5' to='/login'>ورود</Link> :
+                    <Link className='navbar_unlink mx-5' to='/profile'>سلام {user_f_name}! - دانشگاه {user_uni_id}</Link>}
                 </Navbar.Collapse>
             </Container>
         </Navbar>
