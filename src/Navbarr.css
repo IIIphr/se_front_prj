@@ -24,3 +24,11 @@
     background-color: grey;
     border-bottom: 5px solid white;
 }
+
+.navbar_unlink{
+    text-decoration: none;
+    color: white;
+}
+.navbar_unlink:hover{
+    color: grey;
+}
