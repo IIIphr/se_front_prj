@@ -25,6 +25,7 @@ function Login() {
   const dispatch = useDispatch();
   const user_type = useSelector((state) => state.user.user_type);
   const [id_input, set_id_input] = useState('');
+  const [focused, set_focused] = useState(false);
   const [password_input, set_password_input] = useState('');
   const [is_loading, set_loading] = useState(0);
   const [uni_input, set_uni_input] = useState(0);
@@ -47,22 +48,38 @@ function Login() {
       <Navbarr />
       <Container className='d-flex flex-column justify-content-center align-items-center min-vh-75'>
         <h3>ورود</h3>
-        <Form className='d-flex flex-column justify-content-evenly align-items-center min-vh-50'>
+        <Form noValidate className='d-flex flex-column justify-content-evenly align-items-center min-vh-50'>
           <Form.Group>
             <FloatingLabel dir='rtl' className='custom-class' label="شماره‌ی دانشجویی‌">
-              <Form.Control ref={r => ReactDOM.findDOMNode(r).focus()} dir='ltr' onChange={e => set_id_input(e.target.value)} type="text" placeholder="شماره‌ی دانشجویی" />
+              <Form.Control
+                required
+                ref={r => { if(r&&!focused){ReactDOM.findDOMNode(r).focus();set_focused(true);} }}
+                dir='ltr'
+                onChange={e => set_id_input(e.target.value)}
+                type="text"
+                placeholder="شماره‌ی دانشجویی" />
             </FloatingLabel>
           </Form.Group>
 
           <Form.Group>
             <FloatingLabel dir='rtl' className='custom-class' label="دانشگاه">
-              <Form.Control dir='ltr' onChange={e => set_uni_input(e.target.value)} type="text" placeholder="دانشگاه" />
+              <Form.Control
+                required
+                dir='ltr'
+                onChange={e => set_uni_input(e.target.value)}
+                type="text"
+                placeholder="دانشگاه" />
             </FloatingLabel>
           </Form.Group>
 
           <Form.Group>
             <FloatingLabel dir='rtl' className='custom-class' label="رمز">
-              <Form.Control dir='ltr' onChange={e => set_password_input(e.target.value)} type="password" placeholder="رمز" />
+              <Form.Control
+                required
+                dir='ltr'
+                onChange={e => set_password_input(e.target.value)}
+                type="password"
+                placeholder="رمز" />
             </FloatingLabel>
           </Form.Group>
 
