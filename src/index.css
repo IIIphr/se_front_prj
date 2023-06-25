@@ -28,6 +28,9 @@ p{
   transition-duration: 0.2s;
 }
 
+.min-vh-25{
+  min-height: 25vh;
+}
 .min-vh-50{
   min-height: 50vh;
 }
@@ -39,6 +42,12 @@ p{
 }
 .min-vw-75{
   min-width: 75vw;
+}
+.min-w-350px{
+  min-width: 350px;
+}
+.w-30{
+  width: 30%;
 }
 
 .form-floating.custom-class>label {

@@ -41,7 +41,7 @@ function Login() {
         navigate('/profile');
       }
     }
-  }, []);
+  }, [user_type, cookies.user_type]);
 
   return (
     <Fragment>
