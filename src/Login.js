@@ -29,6 +29,7 @@ function Login() {
   const [password_input, set_password_input] = useState('');
   const [is_loading, set_loading] = useState(0);
   const [uni_input, set_uni_input] = useState(0);
+  const [validated, set_validated] = useState(false);
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(['user_f_name', 'user_type', 'user_uni_id', 'user_stu_id']);
 
@@ -48,12 +49,12 @@ function Login() {
       <Navbarr />
       <Container className='d-flex flex-column justify-content-center align-items-center min-vh-75'>
         <h3>ورود</h3>
-        <Form noValidate className='d-flex flex-column justify-content-evenly align-items-center min-vh-50'>
+        <Form noValidate validated={validated} className='d-flex flex-column justify-content-evenly align-items-center min-vh-50'>
           <Form.Group>
             <FloatingLabel dir='rtl' className='custom-class' label="شماره‌ی دانشجویی‌">
               <Form.Control
                 required
-                ref={r => { if(r&&!focused){ReactDOM.findDOMNode(r).focus();set_focused(true);} }}
+                ref={r => { if (r && !focused) { ReactDOM.findDOMNode(r).focus(); set_focused(true); } }}
                 dir='ltr'
                 onChange={e => set_id_input(e.target.value)}
                 type="text"
@@ -86,35 +87,43 @@ function Login() {
           {is_loading == 0 ?
             <button className='btn btn-outline-dark text-center rtl w-100' onClick={(e) => {
               e.preventDefault();
-              set_loading(1);
-              fetch("http://localhost:4000/api/login",
-                {
-                  method: "POST",
-                  body: JSON.stringify({
-                    "studentid": id_input,
-                    "universityid": uni_input,
-                    "password": password_input
+              const form = e.currentTarget;
+              if (form.checkValidity() === false) {
+                e.preventDefault();
+                e.stopPropagation();
+              }
+              else {
+                set_validated(true);
+                set_loading(1);
+                fetch("http://localhost:4000/api/login",
+                  {
+                    method: "POST",
+                    body: JSON.stringify({
+                      "studentid": id_input,
+                      "universityid": uni_input,
+                      "password": password_input
+                    })
                   })
-                })
-                .then(res => res.json())
-                .then((result) => {
-                  if (result.stat == undefined) {
-                    dispatch(change_f_name(result.firstname));
-                    dispatch(change_type("user"));
-                    dispatch(change_uni_id(uni_input));
-                    dispatch(change_credit(result.currentmoney));
-                    dispatch(change_l_name(result.lastname));
-                    dispatch(change_stu_id(id_input));
-                    setCookie('user_f_name', result.firstname, { path: '/', expires: addMonths(new Date(), 1) });
-                    setCookie('user_uni_id', uni_input, { path: '/', expires: addMonths(new Date(), 1) });
-                    setCookie('user_stu_id', id_input, { path: '/', expires: addMonths(new Date(), 1) });
-                    setCookie('user_type', "user", { path: '/', expires: addMonths(new Date(), 1) });
-                    navigate('/profile');
-                  }
-                  else {
-                    set_loading(0);
-                  }
-                });
+                  .then(res => res.json())
+                  .then((result) => {
+                    if (result.stat == undefined) {
+                      dispatch(change_f_name(result.firstname));
+                      dispatch(change_type("user"));
+                      dispatch(change_uni_id(uni_input));
+                      dispatch(change_credit(result.currentmoney));
+                      dispatch(change_l_name(result.lastname));
+                      dispatch(change_stu_id(id_input));
+                      setCookie('user_f_name', result.firstname, { path: '/', expires: addMonths(new Date(), 1) });
+                      setCookie('user_uni_id', uni_input, { path: '/', expires: addMonths(new Date(), 1) });
+                      setCookie('user_stu_id', id_input, { path: '/', expires: addMonths(new Date(), 1) });
+                      setCookie('user_type', "user", { path: '/', expires: addMonths(new Date(), 1) });
+                      navigate('/profile');
+                    }
+                    else {
+                      set_loading(0);
+                    }
+                  });
+              }
             }}>ورود</button> :
             <button className='btn btn-outline-dark text-center rtl w-100' disabled>
               <Spinner animation='border' size='sm' />
