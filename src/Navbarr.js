@@ -41,7 +41,9 @@ function Navbarr() {
                         {user_type == null ?
                             <Link className='navbar_unlink my-3' to='/login'>ورود</Link> :
                             <Fragment>
-                                <Link className='navbar_unlink my-2' to='/profile'>سلام {user_f_name}! - دانشگاه {user_uni_id} - موجودی: 0 ریال</Link>
+                                <Link className='navbar_unlink my-2' to='/profile'>سلام {user_f_name}!</Link>
+                                <p className='my-2'>دانشگاه {user_uni_id}</p>
+                                <p className='my-2'>موجودی: 0 ریال</p>
                                 <Link className='navbar_unlink my-2' to='/add_coupun'>فروش کد</Link>
                                 <button className='btn btn-outline-light text-center rtl my-2' onClick={() => {
                                     dispatch(change_f_name(""));
