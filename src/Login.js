@@ -10,6 +10,7 @@ import Form from 'react-bootstrap/Form';
 import Spinner from 'react-bootstrap/Spinner';
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import ReactDOM from 'react-dom';
 
 function addMonths(date, months) {
   var d = date.getDate();
@@ -49,7 +50,7 @@ function Login() {
         <Form className='d-flex flex-column justify-content-evenly align-items-center min-vh-50'>
           <Form.Group>
             <FloatingLabel dir='rtl' className='custom-class' label="شماره‌ی دانشجویی‌">
-              <Form.Control dir='ltr' onChange={e => set_id_input(e.target.value)} type="text" placeholder="شماره‌ی دانشجویی" />
+              <Form.Control ref={r => ReactDOM.findDOMNode(r).focus()} dir='ltr' onChange={e => set_id_input(e.target.value)} type="text" placeholder="شماره‌ی دانشجویی" />
             </FloatingLabel>
           </Form.Group>
 
