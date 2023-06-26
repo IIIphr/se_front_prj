@@ -119,7 +119,7 @@ function List() {
                           .then(res => res.json())
                           .then((result) => {
                             if (result.stat == 'FOUND') {
-                              navigate('/success');
+                              navigate('/success', {state: record.code});
                             }
                             else {
                               navigate('/list');
