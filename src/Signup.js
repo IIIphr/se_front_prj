@@ -58,7 +58,7 @@ function Signup() {
         <Card bg='dark' text='light' className='min-vw-90 d-flex flex-column text-center p-3 m-3'>
           <Card.Body className='d-flex flex-column justify-content-evenly align-items-center min-vh-75 min-vw-75'>
             <h3>ثبت نام</h3>
-            <Form noValidate validated={validated} className='d-flex flex-column justify-content-evenly align-items-center min-vh-50 text-dark'>
+            <Form noValidate validated={validated} className='d-flex flex-column justify-content-evenly align-items-center min-vh-65 text-dark'>
               <Form.Group>
                 <FloatingLabel dir='rtl' className='custom-class' label="نام">
                   <Form.Control

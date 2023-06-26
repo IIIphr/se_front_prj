@@ -38,6 +38,9 @@ p{
 .min-vh-50{
   min-height: 50vh;
 }
+.min-vh-65{
+  min-height: 65vh;
+}
 .min-vh-75{
   min-height: 75vh;
 }
