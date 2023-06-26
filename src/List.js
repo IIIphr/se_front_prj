@@ -10,6 +10,10 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
+import Spinner from 'react-bootstrap/Spinner';
+import { Accordion } from 'react-bootstrap';
 
 function List() {
   const user_type = useSelector((state) => state.user.user_type);
@@ -85,51 +89,54 @@ function List() {
           <Button variant="danger">ثبت گزارش</Button>
         </Modal.Footer>
       </Modal>
-      <div className='list_root'>
-        <h1 className='rtl'>لیست کدها</h1>
-        <div className='coupun_container'>
-          {is_loading == 0 ?
-            <RotatingLines
-              strokeColor="black"
-              strokeWidth="5"
-              animationDuration="0.75"
-              width="50"
-              visible={true}
-            /> :
-            (data || []).map(record => {
-              return <div key={record._id} className='coupun_entry'>
-                <p>{record.foodname}</p>
-                <p>{record.studentid}</p>
-                <p>{record.price}</p>
-                <button className='ui_btn' onClick={() => {
-                  set_loading(0);
-                  fetch("http://localhost:4000/api/buy",
-                    {
-                      method: "POST",
-                      body: JSON.stringify({
-                        "_id": record._id,
-                        "buyersid": cookies.user_stu_id,
-                        "buyeruid": cookies.user_uni_id
-                      })
-                    })
-                    .then(res => res.json())
-                    .then((result) => {
-                      if (result.stat == 'FOUND') {
-                        navigate('/success');
-                      }
-                      else {
-                        navigate('/list');
-                      }
-                    });
-                }}>buy</button>
-                <button className='ui_btn' onClick={() => {
-                  set_popup(true);
-                }}>report</button>
-              </div>;
-            })
-          }
-        </div>
-      </div>
+      <Container className='d-flex flex-column justify-content-center align-items-center min-vh-75'>
+        <Card bg='dark' text='light' className='min-vw-90 d-flex flex-column text-center p-3 m-3'>
+          <Card.Body className='d-flex flex-column justify-content-evenly align-items-center min-vh-75 min-vw-75'>
+            <h1 className='rtl'>لیست کدها</h1>
+            {is_loading == 0 ?
+              <Spinner /> :
+              <Accordion className='w-100' defaultActiveKey="0">
+                {(data || []).map((record, index) => {
+                  return <Accordion.Item key={index} eventKey={"" + index}>
+                    <Accordion.Header>
+                      <p>نام غذا: {record.foodname}</p>
+                      <pre> - </pre>
+                      <p>قیمت: {record.price} ریال</p>
+                    </Accordion.Header>
+                    <Accordion.Body className='d-flex flex-row-reverse justify-content-evenly align-items-center'>
+                      <p>فروشنده: {record.studentid}</p>
+                      <button className='btn btn-primary text-center rtl' onClick={() => {
+                        set_loading(0);
+                        fetch("http://localhost:4000/api/buy",
+                          {
+                            method: "POST",
+                            body: JSON.stringify({
+                              "_id": record._id,
+                              "buyersid": cookies.user_stu_id,
+                              "buyeruid": cookies.user_uni_id
+                            })
+                          })
+                          .then(res => res.json())
+                          .then((result) => {
+                            if (result.stat == 'FOUND') {
+                              navigate('/success');
+                            }
+                            else {
+                              navigate('/list');
+                            }
+                          });
+                      }}>خرید</button>
+                      <button className='btn btn-danger text-center rtl' onClick={() => {
+                        set_popup(true);
+                      }}>تخلف</button>
+                    </Accordion.Body>
+                  </Accordion.Item>;
+                })}
+              </Accordion>
+            }
+          </Card.Body>
+        </Card>
+      </Container>
     </Fragment>
   );
 }

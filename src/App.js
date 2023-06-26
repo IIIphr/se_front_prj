@@ -33,7 +33,7 @@ function App() {
           <Card.Body className='d-flex flex-column justify-content-evenly align-items-center min-vh-75 min-vw-75'>
             <h1 className='rtl'>به سامانه‌ی تبادل کد فراموشی خوش آمدید</h1>
             {user_type != null ?
-            <Link className='btn btn-outline-light text-center rtl' to='/list'>لیست کدها</Link> :
+              <Link className='btn btn-outline-light text-center rtl' to='/list'>لیست کدها</Link> :
               <p className='rtl'>برای دیدن کدها باید وارد شوید!</p>}
           </Card.Body>
         </Card>
