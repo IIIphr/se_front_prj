@@ -180,6 +180,7 @@ function Profile() {
                         body: JSON.stringify({
                           "_id": user_id,
                           "firstname": f_name_input,
+                          "lastname": l_name,
                           "password": user_password
                         })
                       })
@@ -219,10 +220,22 @@ function Profile() {
                   else {
                     set_validated_l(true);
                     set_loading_l(1);
-                    //fetch
-                    dispatch(change_l_name(l_name_input));
-                    set_loading_l(0);
-                    set_show_tl(true);
+                    fetch("http://localhost:4000/api/user",
+                      {
+                        method: "POST",
+                        body: JSON.stringify({
+                          "_id": user_id,
+                          "firstname": name,
+                          "lastname": l_name_input,
+                          "password": user_password
+                        })
+                      })
+                      .then(() => {
+                        dispatch(change_l_name(l_name_input));
+                        setCookie('user_l_name', l_name_input, { path: '/', expires: addMonths(new Date(), 1) });
+                        set_loading_l(0);
+                        set_show_tl(true);
+                      });
                   }
                 }}>تغییر</button> :
                 <button className='btn btn-outline-light text-center rtl w-30' disabled>
