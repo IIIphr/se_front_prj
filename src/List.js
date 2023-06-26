@@ -13,7 +13,7 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
-import { Accordion } from 'react-bootstrap';
+import Accordion from 'react-bootstrap/Accordion';
 
 function List() {
   const user_type = useSelector((state) => state.user.user_type);
