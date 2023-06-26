@@ -2,7 +2,7 @@ import './Navbarr.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { Fragment, useEffect, useState } from 'react';
-import { change_f_name, change_type, change_uni_id, change_credit, change_password, change_stu_id } from './userSlice';
+import { change_f_name, change_type, change_uni_id, change_credit, change_password, change_stu_id, change_id } from './userSlice';
 import { useNavigate, Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
@@ -76,11 +76,13 @@ function Navbarr() {
                                     dispatch(change_uni_id(-1));
                                     dispatch(change_stu_id(-1));
                                     dispatch(change_password(null));
+                                    dispatch(change_id(-1));
                                     removeCookie('user_f_name');
                                     removeCookie('user_type');
                                     removeCookie('user_uni_id');
                                     removeCookie('user_stu_id');
                                     removeCookie('user_password');
+                                    removeCookie('user_id');
                                     navigate('/');
                                 }}>خروج</button>
                             </Fragment>}

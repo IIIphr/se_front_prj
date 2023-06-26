@@ -127,19 +127,10 @@ function Add_coupun() {
                   navigate('/');
                 });
             }}>ثبت کد</button> :
-            <RotatingLines
-              strokeColor="black"
-              strokeWidth="5"
-              animationDuration="0.75"
-              width="50"
-              visible={true}
-            />}
-
-
+            <button className='btn btn-outline-dark text-center rtl w-100' disabled>
+              <Spinner animation='border' size='sm' />
+            </button>}
         </Form>
-
-
-
       </Container>
     </Fragment>
   );
