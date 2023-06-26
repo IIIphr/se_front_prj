@@ -147,7 +147,7 @@ function Profile() {
         </Toast>
       </ToastContainer>
       <Container className='d-flex flex-column justify-content-center align-items-center min-vh-75'>
-        <Card bg='dark' text='light' className='d-flex flex-column text-center p-3 m-3'>
+        <Card bg='dark' text='light' className='min-vw-90 d-flex flex-column text-center p-3 m-3'>
           <Card.Body className='d-flex flex-column justify-content-between align-items-center min-vh-75 min-vw-75'>
             <h3 className='text-center rtl mb-5'>پروفایل {name}</h3>
             <Form noValidate validated={validated_f} className='min-w-350px w-30 d-flex flex-row-reverse justify-content-between align-items-center text-dark'>
