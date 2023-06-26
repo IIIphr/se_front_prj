@@ -79,7 +79,7 @@ function Profile() {
         <Card bg='dark' text='light' className='d-flex flex-column text-center p-3 m-3'>
           <Card.Body className='d-flex flex-column justify-content-between align-items-center min-vh-75 min-vw-75'>
             <h3 className='text-center rtl mb-5'>پروفایل {name}</h3>
-            <Form noValidate validated={validated_f} className='min-w-350px w-30 d-flex flex-row-reverse justify-content-between align-items-center min-vh-25 text-dark'>
+            <Form noValidate validated={validated_f} className='min-w-350px w-30 d-flex flex-row-reverse justify-content-between align-items-center text-dark'>
               <Form.Group>
                 <FloatingLabel dir='rtl' className='custom-class' label="نام">
                   <Form.Control
@@ -124,7 +124,7 @@ function Profile() {
                   <Spinner animation='border' size='sm' />
                 </button>}
             </Form>
-            <Form noValidate validated={validated_l} className='min-w-350px w-30 d-flex flex-row-reverse justify-content-between align-items-center min-vh-25 text-dark'>
+            <Form noValidate validated={validated_l} className='min-w-350px w-30 d-flex flex-row-reverse justify-content-between align-items-center text-dark'>
               <Form.Group>
                 <FloatingLabel dir='rtl' className='custom-class' label="نام خانوادگی">
                   <Form.Control
@@ -158,7 +158,7 @@ function Profile() {
                   <Spinner animation='border' size='sm' />
                 </button>}
             </Form>
-            <Form noValidate validated={validated_p} className='min-w-350px w-30 d-flex flex-row-reverse justify-content-between align-items-center min-vh-25 text-dark'>
+            <Form noValidate validated={validated_p} className='min-w-350px w-30 d-flex flex-row-reverse justify-content-between align-items-center text-dark'>
               <Form.Group>
                 <FloatingLabel dir='rtl' className='custom-class' label="رمز">
                   <Form.Control
