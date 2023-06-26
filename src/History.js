@@ -40,7 +40,6 @@ function History() {
         })
         .then(res => res.json())
         .then((result) => {
-          console.log(result.coupons);
           set_data(result.coupons);
           set_loading(1);
         });
@@ -52,18 +51,27 @@ function History() {
       <Navbarr />
       <div className='list_root'>
         <h1 className='rtl'>لیست کدها</h1>
-        <div className='coupun_container'>
+        <div className='history_container'>
           {is_loading == 0 ?
             <Spinner animation='border' size='lg' /> :
-            (data || []).map(record => {
-              return <div key={record._id} className='coupun_entry'>
-                <p>{record.code}</p>
-                <p>{record.foodname}</p>
-                <p>{record.canteenid}</p>
-                <p>{record.studentid}</p>
-                <p>{record.price}</p>
-              </div>;
-            })
+            <Fragment>
+              <div className='history_header'>
+                <p>کد فراموشی</p>
+                <p>غذا</p>
+                <p>سلف</p>
+                <p>فروشنده</p>
+                <p>قیمت</p>
+              </div>
+              {(data || []).map(record => {
+                return <div key={record._id} className='history_entry'>
+                  <p>{record.code}</p>
+                  <p>{record.foodname}</p>
+                  <p>{record.canteenid}</p>
+                  <p>{record.studentid}</p>
+                  <p>{record.price}</p>
+                </div>;
+              })}
+            </Fragment>
           }
         </div>
       </div>

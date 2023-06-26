@@ -33,6 +33,15 @@
   border-bottom: 5px solid black;
 }
 
+.history_header{
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
 .ui_btn{
   color: black;
   direction: rtl;
