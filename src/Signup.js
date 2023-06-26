@@ -1,6 +1,6 @@
 import './Signup.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { change_credit, change_f_name, change_l_name, change_stu_id, change_type, change_uni_id } from './userSlice';
+import { change_password, change_id, change_credit, change_f_name, change_l_name, change_stu_id, change_type, change_uni_id } from './userSlice';
 import { useState, useEffect, Fragment } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate, Link } from 'react-router-dom';
@@ -26,14 +26,19 @@ function Signup() {
   const [uni_input, set_uni_input] = useState(-1);
   const [id_input, set_id_input] = useState(-1);
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(['user_f_name', 'user_type', 'user_uni_id', 'user_stu_id']);
+  const [cookies, setCookie] = useCookies(['user_id', 'user_f_name', 'user_type', 'user_uni_id', 'user_stu_id', 'user_password', 'user_l_name', 'user_credit']);
 
   useEffect(() => {
-    if(user_type == null){
-      if(cookies.user_type !== "undefined" && cookies.user_type){
+    if (user_type == null) {
+      if (cookies.user_type !== "undefined" && cookies.user_type) {
         dispatch(change_f_name(cookies.user_f_name));
+        dispatch(change_l_name(cookies.user_l_name));
+        dispatch(change_credit(cookies.user_credit));
         dispatch(change_type(cookies.user_type));
         dispatch(change_uni_id(cookies.user_uni_id));
+        dispatch(change_password(cookies.user_password));
+        dispatch(change_stu_id(cookies.user_stu_id));
+        dispatch(change_id(cookies.user_id));
         navigate('/profile');
       }
     }
@@ -55,42 +60,47 @@ function Signup() {
         <p className='rtl'>رمز</p>
         <input type='text' id='password_input' value={password_input} onInput={e => set_password_input(e.target.value)}></input>
         {is_loading == 0 ?
-        <button className='ui_btn' onClick={() => {
-          set_loading(1); 
-          fetch("http://localhost:4000/api/signup",
-          {
-            method: "POST",
-            body: JSON.stringify({
-              "studentid": id_input,
-              "firstname": name_input,
-              "lastname": last_name_input,
-              "universityid": uni_input,
-              "password": password_input, 
-              "currentmoney": 0
-            })
-          })
-            .then(res => res.json())
-            .then((result) => {
-              dispatch(change_f_name(name_input));
-              dispatch(change_type("user"));
-              dispatch(change_uni_id(uni_input));
-              dispatch(change_credit(0));
-              dispatch(change_l_name(last_name_input));
-              dispatch(change_stu_id(id_input));
-              setCookie('user_f_name', name_input, { path: '/', expires: addMonths(new Date(), 1) });
-              setCookie('user_uni_id', uni_input, { path: '/', expires: addMonths(new Date(), 1) });
-              setCookie('user_stu_id', id_input, { path: '/', expires: addMonths(new Date(), 1) });
-              setCookie('user_type', "user", { path: '/', expires: addMonths(new Date(), 1) });
-              navigate('/');
-            });
-        }}>ثبت نام</button> :
-        <RotatingLines
-          strokeColor="black"
-          strokeWidth="5"
-          animationDuration="0.75"
-          width="50"
-          visible={true}
-        />}
+          <button className='ui_btn' onClick={() => {
+            set_loading(1);
+            fetch("http://localhost:4000/api/signup",
+              {
+                method: "POST",
+                body: JSON.stringify({
+                  "studentid": id_input,
+                  "firstname": name_input,
+                  "lastname": last_name_input,
+                  "universityid": uni_input,
+                  "password": password_input,
+                  "currentmoney": 0
+                })
+              })
+              .then(res => res.json())
+              .then((result) => {
+                dispatch(change_f_name(name_input));
+                dispatch(change_type("user"));
+                dispatch(change_uni_id(uni_input));
+                dispatch(change_credit(0));
+                dispatch(change_l_name(last_name_input));
+                dispatch(change_password(password_input));
+                dispatch(change_stu_id(id_input));
+                dispatch(change_id(result._id));
+                setCookie('user_f_name', name_input, { path: '/', expires: addMonths(new Date(), 1) });
+                setCookie('user_l_name', last_name_input, { path: '/', expires: addMonths(new Date(), 1) });
+                setCookie('user_uni_id', uni_input, { path: '/', expires: addMonths(new Date(), 1) });
+                setCookie('user_stu_id', id_input, { path: '/', expires: addMonths(new Date(), 1) });
+                setCookie('user_password', password_input, { path: '/', expires: addMonths(new Date(), 1) });
+                setCookie('user_type', "user", { path: '/', expires: addMonths(new Date(), 1) });
+                setCookie('user_id', result._id, { path: '/', expires: addMonths(new Date(), 1) });
+                setCookie('user_credit', 0, { path: '/', expires: addMonths(new Date(), 1) });
+              });
+          }}>ثبت نام</button> :
+          <RotatingLines
+            strokeColor="black"
+            strokeWidth="5"
+            animationDuration="0.75"
+            width="50"
+            visible={true}
+          />}
         <Link to='/login'>ورود</Link>
       </div>
     </Fragment>

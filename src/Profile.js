@@ -178,7 +178,8 @@ function Profile() {
                       {
                         method: "POST",
                         body: JSON.stringify({
-                          "_id": user_id,
+                          "studentid": user_stu_id,
+                          "universityid": user_uni_id,
                           "firstname": f_name_input,
                           "lastname": l_name,
                           "password": user_password
@@ -224,7 +225,8 @@ function Profile() {
                       {
                         method: "POST",
                         body: JSON.stringify({
-                          "_id": user_id,
+                          "studentid": user_stu_id,
+                          "universityid": user_uni_id,
                           "firstname": name,
                           "lastname": l_name_input,
                           "password": user_password
@@ -270,8 +272,10 @@ function Profile() {
                       {
                         method: "POST",
                         body: JSON.stringify({
-                          "_id": user_id,
+                          "studentid": user_stu_id,
+                          "universityid": user_uni_id,
                           "firstname": name,
+                          "lastname": l_name,
                           "password": password_input
                         })
                       })

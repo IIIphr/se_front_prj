@@ -2,7 +2,7 @@ import './Navbarr.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useCookies } from 'react-cookie';
 import { Fragment, useEffect, useState } from 'react';
-import { change_f_name, change_type, change_uni_id, change_credit, change_password, change_stu_id, change_id } from './userSlice';
+import { change_l_name, change_f_name, change_type, change_uni_id, change_credit, change_password, change_stu_id, change_id } from './userSlice';
 import { useNavigate, Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
@@ -19,16 +19,19 @@ function Navbarr() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [is_loading, set_loading] = useState(0);
-    const [cookies, removeCookie] = useCookies(['user_f_name', 'user_type', 'user_uni_id', 'user_password', 'user_stu_id']);
+    const [cookies, removeCookie] = useCookies(['user_id', 'user_f_name', 'user_type', 'user_uni_id', 'user_stu_id', 'user_password', 'user_l_name', 'user_credit']);
 
     useEffect(() => {
         if (user_type == null) {
             if (cookies.user_type !== "undefined" && cookies.user_type) {
                 dispatch(change_f_name(cookies.user_f_name));
+                dispatch(change_l_name(cookies.user_l_name));
+                dispatch(change_credit(cookies.user_credit));
                 dispatch(change_type(cookies.user_type));
                 dispatch(change_uni_id(cookies.user_uni_id));
                 dispatch(change_password(cookies.user_password));
                 dispatch(change_stu_id(cookies.user_stu_id));
+                dispatch(change_id(cookies.user_id));
             }
         }
         else {
@@ -71,18 +74,22 @@ function Navbarr() {
                                 }
                                 <Link className='navbar_unlink my-2' to='/add_coupun'>فروش کد</Link>
                                 <button className='btn btn-outline-light text-center rtl my-2' onClick={() => {
-                                    dispatch(change_f_name(""));
+                                    dispatch(change_f_name(null));
+                                    dispatch(change_l_name(null));
+                                    dispatch(change_credit(null));
                                     dispatch(change_type(null));
-                                    dispatch(change_uni_id(-1));
-                                    dispatch(change_stu_id(-1));
+                                    dispatch(change_uni_id(null));
                                     dispatch(change_password(null));
-                                    dispatch(change_id(-1));
+                                    dispatch(change_stu_id(null));
+                                    dispatch(change_id(null));
                                     removeCookie('user_f_name');
-                                    removeCookie('user_type');
+                                    removeCookie('user_l_name');
                                     removeCookie('user_uni_id');
                                     removeCookie('user_stu_id');
                                     removeCookie('user_password');
+                                    removeCookie('user_type');
                                     removeCookie('user_id');
+                                    removeCookie('user_credit');
                                     navigate('/');
                                 }}>خروج</button>
                             </Fragment>}

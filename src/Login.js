@@ -30,12 +30,14 @@ function Login() {
   const [uni_input, set_uni_input] = useState(0);
   const [validated, set_validated] = useState(false);
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(['user_id', 'user_f_name', 'user_type', 'user_uni_id', 'user_stu_id', 'user_password']);
+  const [cookies, setCookie] = useCookies(['user_id', 'user_f_name', 'user_type', 'user_uni_id', 'user_stu_id', 'user_password', 'user_l_name', 'user_credit']);
 
   useEffect(() => {
     if (user_type == null) {
       if (cookies.user_type !== "undefined" && cookies.user_type) {
         dispatch(change_f_name(cookies.user_f_name));
+        dispatch(change_l_name(cookies.user_l_name));
+        dispatch(change_credit(cookies.user_credit));
         dispatch(change_type(cookies.user_type));
         dispatch(change_uni_id(cookies.user_uni_id));
         dispatch(change_password(cookies.user_password));
@@ -118,11 +120,13 @@ function Login() {
                       dispatch(change_stu_id(id_input));
                       dispatch(change_id(result._id));
                       setCookie('user_f_name', result.firstname, { path: '/', expires: addMonths(new Date(), 1) });
+                      setCookie('user_l_name', result.lastname, { path: '/', expires: addMonths(new Date(), 1) });
                       setCookie('user_uni_id', uni_input, { path: '/', expires: addMonths(new Date(), 1) });
                       setCookie('user_stu_id', id_input, { path: '/', expires: addMonths(new Date(), 1) });
                       setCookie('user_password', password_input, { path: '/', expires: addMonths(new Date(), 1) });
                       setCookie('user_type', "user", { path: '/', expires: addMonths(new Date(), 1) });
-                      setCookie('user_id', "result._id", { path: '/', expires: addMonths(new Date(), 1) });
+                      setCookie('user_id', result._id, { path: '/', expires: addMonths(new Date(), 1) });
+                      setCookie('user_credit', result.currentmoney, { path: '/', expires: addMonths(new Date(), 1) });
                       navigate('/profile');
                     }
                     else {
