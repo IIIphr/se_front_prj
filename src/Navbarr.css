@@ -1,0 +1,34 @@
+.navbar_root{
+    width: 100%;
+    height: 10vh;
+    background-color: black;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+}
+
+.navbar_link{
+    color: white;
+    direction: rtl;
+    text-decoration: none;
+    padding: 5px 10px;
+    margin: 0px 20px;
+    border-bottom: 1px solid white;
+}
+.navbar_link:hover{
+    background-color: grey;
+    border-bottom: 5px solid white;
+}
+
+.navbar_unlink{
+    text-decoration: none;
+    color: white;
+}
+.navbar_unlink:hover{
+    color: rgb(172, 172, 172);
+}

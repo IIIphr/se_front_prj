@@ -1,0 +1,9 @@
+.app_root{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}

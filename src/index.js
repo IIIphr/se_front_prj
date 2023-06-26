@@ -1,0 +1,66 @@
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import { Provider } from 'react-redux'
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import { CookiesProvider } from 'react-cookie';
+import App from './App';
+import List from './List';
+import Login from './Login';
+import Signup from './Signup';
+import reportWebVitals from './reportWebVitals';
+import store from './store'
+import Profile from './Profile';
+import Add_coupun from './Add_coupun';
+import Success from './Success';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "/list",
+    element: <List />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
+  },
+  {
+    path: "/add_coupun",
+    element: <Add_coupun />,
+  },
+  {
+    path: "/success",
+    element: <Success />,
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <CookiesProvider>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    </CookiesProvider>
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
