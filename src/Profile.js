@@ -10,7 +10,7 @@ import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Spinner from 'react-bootstrap/Spinner';
 import Toast from 'react-bootstrap/Toast';
-import { change_f_name, change_l_name } from './userSlice';
+import { change_f_name, change_l_name, change_password } from './userSlice';
 import { ToastContainer } from 'react-bootstrap';
 
 function addMonths(date, months) {
@@ -32,13 +32,17 @@ function Profile() {
   const dispatch = useDispatch();
   const [validated_f, set_validated_f] = useState(false);
   const [validated_l, set_validated_l] = useState(false);
+  const [validated_p, set_validated_p] = useState(false);
   const [f_name_input, set_f_name_input] = useState(name);
   const [l_name_input, set_l_name_input] = useState(l_name);
+  const [password_input, set_password_input] = useState(user_password);
   const [cookies, setCookie] = useCookies(['user_type', 'user_f_name']);
   const [is_loading_f, set_loading_f] = useState(0);
   const [is_loading_l, set_loading_l] = useState(0);
+  const [is_loading_p, set_loading_p] = useState(0);
   const [show_tf, set_show_tf] = useState(false);
   const [show_tl, set_show_tl] = useState(false);
+  const [show_tp, set_show_tp] = useState(false);
 
   useEffect(() => {
     if (user_type == null) {
@@ -64,6 +68,12 @@ function Profile() {
           </Toast.Header>
           <Toast.Body>نام خانوادگی شما تغییر کرد</Toast.Body>
         </Toast>
+        <Toast onClose={() => set_show_tp(false)} show={show_tp} delay={3000} autohide>
+          <Toast.Header>
+            <strong className="me-auto">تغییر</strong>
+          </Toast.Header>
+          <Toast.Body>رمز شما تغییر کرد</Toast.Body>
+        </Toast>
       </ToastContainer>
       <Container className='d-flex flex-column justify-content-center align-items-center min-vh-75'>
         <Card bg='dark' text='light' className='d-flex flex-column text-center p-3 m-3'>
@@ -77,6 +87,7 @@ function Profile() {
                     dir='rtl'
                     onChange={e => set_f_name_input(e.target.value)}
                     type="text"
+                    defaultValue={name}
                     placeholder="نام" />
                 </FloatingLabel>
               </Form.Group>
@@ -120,6 +131,7 @@ function Profile() {
                     required
                     dir='rtl'
                     onChange={e => set_l_name_input(e.target.value)}
+                    defaultValue={l_name}
                     type="text"
                     placeholder="نام خانوادگی" />
                 </FloatingLabel>
@@ -140,6 +152,51 @@ function Profile() {
                     dispatch(change_l_name(l_name_input));
                     set_loading_l(0);
                     set_show_tl(true);
+                  }
+                }}>تغییر</button> :
+                <button className='btn btn-outline-light text-center rtl w-30' disabled>
+                  <Spinner animation='border' size='sm' />
+                </button>}
+            </Form>
+            <Form noValidate validated={validated_p} className='min-w-350px w-30 d-flex flex-row-reverse justify-content-between align-items-center min-vh-25 text-dark'>
+              <Form.Group>
+                <FloatingLabel dir='rtl' className='custom-class' label="رمز">
+                  <Form.Control
+                    required
+                    dir='ltr'
+                    onChange={e => set_password_input(e.target.value)}
+                    type="password"
+                    defaultValue={user_password}
+                    placeholder="نام" />
+                </FloatingLabel>
+              </Form.Group>
+
+              {is_loading_p == 0 ?
+                <button className='btn btn-outline-light text-center rtl h-100 w-30' onClick={(e) => {
+                  e.preventDefault();
+                  const form = e.currentTarget;
+                  if (form.checkValidity() === false) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }
+                  else {
+                    set_validated_p(true);
+                    set_loading_p(1);
+                    fetch("http://localhost:4000/api/user",
+                      {
+                        method: "POST",
+                        body: JSON.stringify({
+                          "_id": user_id,
+                          "firstname": name,
+                          "password": password_input
+                        })
+                      })
+                      .then(() => {
+                        dispatch(change_password(password_input));
+                        setCookie('user_password', password_input, { path: '/', expires: addMonths(new Date(), 1) });
+                        set_loading_p(0);
+                        set_show_tp(true);
+                      });
                   }
                 }}>تغییر</button> :
                 <button className='btn btn-outline-light text-center rtl w-30' disabled>
