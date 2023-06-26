@@ -9,7 +9,8 @@ export const userSlice = createSlice({
     user_type: null,
     user_f_name: "",
     user_l_name: "",
-    user_credit: 0
+    user_credit: 0,
+    user_password: null
   },
   reducers: {
     change_id: (state, action) => {
@@ -32,10 +33,13 @@ export const userSlice = createSlice({
     },
     change_credit: (state, action) => {
       state.user_credit = action.payload;
+    },
+    change_password: (state, action) => {
+      state.user_password = action.payload;
     }
   },
 });
 
-export const { change_id, change_uni_id, change_stu_id, change_type, change_f_name, change_l_name, change_credit } = userSlice.actions;
+export const { change_id, change_uni_id, change_stu_id, change_type, change_f_name, change_l_name, change_credit, change_password } = userSlice.actions;
 
 export default userSlice.reducer;

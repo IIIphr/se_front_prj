@@ -1,6 +1,6 @@
 import './Login.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { change_credit, change_f_name, change_l_name, change_stu_id, change_type, change_uni_id } from './userSlice';
+import { change_credit, change_f_name, change_l_name, change_password, change_stu_id, change_type, change_uni_id } from './userSlice';
 import { useState, useEffect, Fragment } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate, Link } from 'react-router-dom';
@@ -30,7 +30,7 @@ function Login() {
   const [uni_input, set_uni_input] = useState(0);
   const [validated, set_validated] = useState(false);
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(['user_f_name', 'user_type', 'user_uni_id', 'user_stu_id']);
+  const [cookies, setCookie] = useCookies(['user_f_name', 'user_type', 'user_uni_id', 'user_stu_id', 'user_password']);
 
   useEffect(() => {
     if (user_type == null) {
@@ -38,6 +38,8 @@ function Login() {
         dispatch(change_f_name(cookies.user_f_name));
         dispatch(change_type(cookies.user_type));
         dispatch(change_uni_id(cookies.user_uni_id));
+        dispatch(change_password(cookies.user_password));
+        dispatch(change_stu_id(cookies.user_stu_id));
         navigate('/profile');
       }
     }
@@ -111,10 +113,12 @@ function Login() {
                       dispatch(change_uni_id(uni_input));
                       dispatch(change_credit(result.currentmoney));
                       dispatch(change_l_name(result.lastname));
+                      dispatch(change_password(password_input));
                       dispatch(change_stu_id(id_input));
                       setCookie('user_f_name', result.firstname, { path: '/', expires: addMonths(new Date(), 1) });
                       setCookie('user_uni_id', uni_input, { path: '/', expires: addMonths(new Date(), 1) });
                       setCookie('user_stu_id', id_input, { path: '/', expires: addMonths(new Date(), 1) });
+                      setCookie('user_password', password_input, { path: '/', expires: addMonths(new Date(), 1) });
                       setCookie('user_type', "user", { path: '/', expires: addMonths(new Date(), 1) });
                       navigate('/profile');
                     }
