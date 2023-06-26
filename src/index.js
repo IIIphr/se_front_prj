@@ -17,6 +17,7 @@ import store from './store'
 import Profile from './Profile';
 import Add_coupun from './Add_coupun';
 import Success from './Success';
+import History from './History';
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
   {
     path: "/success",
     element: <Success />,
+  },
+  {
+    path: "/history",
+    element: <History />,
   },
 ]);
 

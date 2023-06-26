@@ -17,8 +17,6 @@ function Profile() {
   const name = useSelector((state) => state.user.user_f_name);
   const l_name = useSelector((state) => state.user.user_l_name);
   const user_type = useSelector((state) => state.user.user_type);
-  const stu_id = useSelector((state) => state.user.user_stu_id);
-  const uni_id = useSelector((state) => state.user.user_uni_id);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [validated_f, set_validated_f] = useState(false);
@@ -28,7 +26,6 @@ function Profile() {
   const [cookies] = useCookies(['user_type']);
   const [is_loading_f, set_loading_f] = useState(0);
   const [is_loading_l, set_loading_l] = useState(0);
-  const [is_loading_t, set_loading_t] = useState(0);
   const [show_tf, set_show_tf] = useState(false);
   const [show_tl, set_show_tl] = useState(false);
 
@@ -127,43 +124,7 @@ function Profile() {
                   <Spinner animation='border' size='sm' />
                 </button>}
             </Form>
-
-            {is_loading_t == 0 ?
-              <button className='btn btn-outline-light text-center rtl' onClick={(e) => {
-                set_loading_t(1);
-                fetch("http://localhost:4000/api/history",
-                  {
-                    method: "POST",
-                    body: JSON.stringify({
-                      "studentid": stu_id,
-                      "universityid": uni_id
-                    })
-                  })
-                  .then(res => res.json())
-                  .then((result) => {
-                    console.log(result);
-                    set_loading_t(0);
-                    // if (result.stat == undefined) {
-                    //   dispatch(change_f_name(result.firstname));
-                    //   dispatch(change_type("user"));
-                    //   dispatch(change_uni_id(uni_input));
-                    //   dispatch(change_credit(result.currentmoney));
-                    //   dispatch(change_l_name(result.lastname));
-                    //   dispatch(change_stu_id(id_input));
-                    //   setCookie('user_f_name', result.firstname, { path: '/', expires: addMonths(new Date(), 1) });
-                    //   setCookie('user_uni_id', uni_input, { path: '/', expires: addMonths(new Date(), 1) });
-                    //   setCookie('user_stu_id', id_input, { path: '/', expires: addMonths(new Date(), 1) });
-                    //   setCookie('user_type', "user", { path: '/', expires: addMonths(new Date(), 1) });
-                    //   navigate('/profile');
-                    // }
-                    // else {
-                    //   set_loading_t(0);
-                    // }
-                  });
-              }}>history</button> :
-              <button className='btn btn-outline-light text-center rtl w-30' disabled>
-                <Spinner animation='border' size='sm' />
-              </button>}
+            <Link className='btn btn-outline-light text-center rtl' to='/history'>تاریخچه‌ی خرید</Link>
           </Card.Body>
         </Card>
       </Container>
