@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbarr from './Navbarr';
 import { RotatingLines } from 'react-loader-spinner';
 
+// for adding coupun
 function Add_coupun() {
   const [coupun_code, set_coupun_code] = useState('');
   const [canteen_code, set_canteen_code] = useState('');
